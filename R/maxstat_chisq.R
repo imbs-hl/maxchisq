@@ -1,5 +1,4 @@
 
-## TODO: Not needed to compute all test statistics?
 ##' @importFrom Rcpp evalCpp
 ##' @useDynLib maxchisq
 ##' @export
@@ -26,32 +25,54 @@ maxstat_chisq <- function(y, x, minprop = 0.1, maxprop = 1-minprop, pval_method 
   })
   num_right <- tabulate(y_sorted) - num_left
   
-  ##browser()
   ## Test statistics for all cutpoints
   teststats <- sapply(1:length(possible_splits), function(i) {
     chisq_statistic(num_left[, i], num_right[, i], k = k, n = n)
   })
   
-  ## P-values for all cutpoints
+  best_idx <- which.max(teststats)  
+  best_cutpoint <- possible_splits[best_idx]
+  best_teststat <- teststats[best_idx]
+  
+  ## P-value for best cutpoint
   if (pval_method == "betensky") {
-    pvalues <- pmaxchisq_betensky(b = possible_splits, k = k, minprop = minprop, maxprop = maxprop)
+    pvalue <- pmaxchisq_betensky(b = best_cutpoint, k = k, minprop = minprop, maxprop = maxprop)
   } else if (pval_method == "miller") {
-    pvalues <- pmaxchisq_miller(b = possible_splits, minprop = minprop, maxprop = maxprop)
+    pvalue <- pmaxchisq_miller(b = best_cutpoint, minprop = minprop, maxprop = maxprop)
   } else if (pval_method == "permutation") {
-    pvalues <- pmaxchisq_permutation(b = possible_splits, y = y, x = x, minprop = minprop, maxprop = maxprop, ...)
+    pvalue <- pmaxchisq_permutation(b = best_cutpoint, y = y, x = x, minprop = minprop, maxprop = maxprop, ...)
   } else if (pval_method == "none") {
-    pvalues <- NA
+    pvalue <- NA
   } else {
     stop("Error: Unknown pval_method.")
   }
   
   ## Return best cutpoint, test statistic and p-value
-  if (pval_method == "none") {
-    best_idx <- which.max(teststats)  
-  } else {
-    best_idx <- which.min(pvalues)  
+  c(cutpoint = best_cutpoint, teststat = best_teststat, pvalue = pvalue)
+}
+
+##' @export
+maxstat_chisq_test <- function(formula, data, na.action, ...) {
+  ## TODO: Check parameters
+  
+  formula <- formula(formula)
+  if (class(formula) != "formula") {
+    stop("Error: Invalid formula.")
   }
-  list(cutpoint = possible_splits[best_idx], teststat = teststats[best_idx], pvalue = pvalues[best_idx])
+  
+  ## Apply formula
+  data_model <- model.frame(formula, data, na.action = na.action)
+  
+  ## Apply maximally selected chi2 statistic to each covariate
+  maxstats <- data.frame(t(sapply(data_model[, -1], maxstat_chisq, y = data_model[, 1], ...)))
+  
+  ## Select covariate with minimal p value
+  best_idx <- max.col(t(-maxstats$pvalue))
+  
+  ## Return best covariate, cutpoint and p value
+  list(covariate = rownames(maxstats)[best_idx], 
+    cutpoint = maxstats[best_idx, ]$cutpoint, 
+    pvalue = maxstats[best_idx, ]$pvalue)
 }
 
 

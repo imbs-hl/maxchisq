@@ -43,6 +43,7 @@ pmaxchisq_miller <- function(b, minprop = 0.1, maxprop = 1-minprop) {
   pmin(p, 1)
 }
 
+## TODO: Compare speed if only C++ function for test statistic used
 ## TODO: Possible splits and num_left are computed here and in main function.. But should this work without main function, too?
 ##' @import Rcpp
 pmaxchisq_permutation <- function(b, y, x,
