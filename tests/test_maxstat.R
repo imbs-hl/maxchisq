@@ -28,3 +28,6 @@ max(teststats)
 
 ## Use new function
 maxstat_chisq(y = y, x = x, pval_method = "betensky")
+
+## Apply to data frame
+maxstat_chisq_test(Species ~ ., iris, pval_method = "betensky")
