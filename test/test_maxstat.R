@@ -32,7 +32,5 @@ maxstat_chisq(y = y, x = x, pval_method = "betensky")
 ## Apply to data frame
 maxstat_chisq_test(Species ~ ., iris, pval_method = "betensky")
 
-## Test for data frame with only one covariate
-## TODO
-
-## TODO: Proper test set..
+## Only one covar
+maxstat_chisq_test(Species ~ Petal.Length, iris, pval_method = "betensky")
