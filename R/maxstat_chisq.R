@@ -112,7 +112,7 @@ maxstat_chisq_test <- function(formula, data, na.action, ...) {
   data_model <- model.frame(formula, data, na.action = na.action)
 
   ## Apply maximally selected chi2 statistic to each covariate
-  maxstats <- data.frame(t(sapply(data_model[, -1, drop = FALSE], maxstat_chisq, y = data_model[, 1, drop = FALSE], ...)))
+  maxstats <- data.frame(t(sapply(data_model[, -1, drop = FALSE], maxstat_chisq, y = data_model[, 1], ...)))
 
   ## Select covariate with minimal p value
   best_idx <- max.col(t(-maxstats$pvalue))

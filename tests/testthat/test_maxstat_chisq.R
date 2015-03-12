@@ -16,5 +16,5 @@ test_that("maxstat_chisq_test object has desired structure", {
   betensky <- maxstat_chisq_test(Species ~ ., iris, pval_method = "betensky")
   expect_is(betensky, "list")
   expect_equal(length(betensky), 3)
-  expect_named(betensky, c("cutpoint", "teststat", "pvalue"))
+  expect_named(betensky, c("covariate", "cutpoint", "pvalue"))
 })
