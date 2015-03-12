@@ -25,11 +25,24 @@
 ##' @useDynLib maxchisq
 ##' @export
 maxstat_chisq <- function(y, x, minprop = 0.1, maxprop = 1-minprop, pval_method = "betensky", ...) {
+  
+  ## Check arguments
+  if (!is.factor(y)) {
+    stop("Error: Invalid y argument. Is y a factor?")
+  }
+  if (is.factor(x) & !is.ordered(x)) {
+    stop("Error: Cannot handle unordered factor covariates. Please exclude or order.")
+  }
+  if (minprop < 0 | minprop > 0.5) {
+    stop("Error: minprop not in [0, 0.5].")
+  }
+  if (maxprop < 0.5 | maxprop > 1) {
+    stop("Error: maxprop not in [0.5, 1].")
+  }
+  
   n <- length(y)
   k <- nlevels(y)
 
-  ## TODO: Check parameters
-  ## If y is a factor, etc ..
   if (pval_method == "miller" & k != 2) {
     stop("Error: Miller & Siegmund approximation only applicable to 2-class problems.")
   }
@@ -85,11 +98,14 @@ maxstat_chisq <- function(y, x, minprop = 0.1, maxprop = 1-minprop, pval_method 
 ##' @author Marvin N. Wright
 ##' @export
 maxstat_chisq_test <- function(formula, data, na.action, ...) {
-  ## TODO: Check parameters
 
+  ## Check arguments
   formula <- formula(formula)
   if (class(formula) != "formula") {
     stop("Error: Invalid formula.")
+  }
+  if (!is.data.frame(data)) {
+    stop("Error: Invalid data argument.")
   }
 
   ## Apply formula

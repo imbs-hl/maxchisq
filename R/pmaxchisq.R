@@ -11,7 +11,8 @@
 ##' @references
 ##'   Betensky, R. A., & Rabinowitz, D. (1999). Maximally Selected \eqn{\chi2} Statistics for k×2 Tables. Biometrics 55, 317-320.
 pmaxchisq_betensky <- function(b, k, minprop = 0.1, maxprop = 1-minprop) {
-
+  ## Internal function, no argument checks!
+  
   ## Compute p value
   r <- maxprop * (1 - minprop) / (minprop * (1 - maxprop))
   p <- dgamma(b, shape = (k - 1)/2, scale = 2) * ((b - k + 1)*log(r) + 4)
@@ -42,7 +43,8 @@ pmaxchisq_betensky <- function(b, k, minprop = 0.1, maxprop = 1-minprop) {
 ##' @references
 ##'   Miller, R., & Siegmund, D. (1982). Maximally selected chi square statistics. Biometrics 38, 1011-1016.
 pmaxchisq_miller <- function(b, minprop = 0.1, maxprop = 1-minprop) {
-
+  ## Internal function, no argument checks!
+  
   ## Compute p value
   r <- maxprop * (1 - minprop) / (minprop * (1 - maxprop))
   db <- dnorm(b)
@@ -81,6 +83,8 @@ pmaxchisq_miller <- function(b, minprop = 0.1, maxprop = 1-minprop) {
 pmaxchisq_permutation <- function(b, y, x,
                                   minprop = 0.1, maxprop = 1-minprop,
                                   num_permutations = 10000) {
+  ## Internal function, no argument checks!
+  
   n <- length(y)
   k <- nlevels(y)
   class_counts <- tabulate(y, nbins = k)
