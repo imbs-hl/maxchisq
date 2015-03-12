@@ -9,3 +9,4 @@ Description: Maximally selected chi squared statistics. Find the best cutpoint i
 License: GPL-3
 Imports: Rcpp
 LinkingTo: Rcpp
+Suggests: testthat
