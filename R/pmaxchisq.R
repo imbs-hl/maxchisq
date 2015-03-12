@@ -1,5 +1,5 @@
 
-##' P-value estimation for a maximally selected chi squared statistic using the approximation by Betensky & Rabinowitz 1999. 
+##' P-value estimation for a maximally selected chi squared statistic using the approximation by Betensky & Rabinowitz (1999). 
 ##'
 ##' @title Betensky & Rabinowitz p-value estimation
 ##' @param b Quantile, i.e., the value of the test statistic
@@ -9,7 +9,7 @@
 ##' @return P-value estimation
 ##' @author Marvin N. Wright
 ##' @references
-##'   Betensky, R. A., & Rabinowitz, D. (1999). Maximally Selected \eqn{\chi^2} Statistics for k×2 Tables. Biometrics 55, 317-320.
+##'   Betensky, R. A., & Rabinowitz, D. (1999). Maximally Selected \eqn{\chi2} Statistics for k×2 Tables. Biometrics 55, 317-320.
 pmaxchisq_betensky <- function(b, k, minprop = 0.1, maxprop = 1-minprop) {
 
   ## Compute p value
@@ -31,7 +31,7 @@ pmaxchisq_betensky <- function(b, k, minprop = 0.1, maxprop = 1-minprop) {
   pmin(p, 1)
 }
 
-##' P-value estimation for a maximally selected chi squared statistic using the approximation by Miller & Siegmund 1982. 
+##' P-value estimation for a maximally selected chi squared statistic using the approximation by Miller & Siegmund (1982). 
 ##'
 ##' @title Miller & Siegmund p-value estimation
 ##' @param b Quantile, i.e., the value of the test statistic
@@ -74,7 +74,7 @@ pmaxchisq_miller <- function(b, minprop = 0.1, maxprop = 1-minprop) {
 ##' @param x Covariate
 ##' @param minprop Lower quantile for cutpoint 
 ##' @param maxprop Upper quantile for cutpoint 
-##' @param num_permutations
+##' @param num_permutations Number of permutations used
 ##' @return P-value estimation
 ##' @author Marvin N. Wright
 #' @import Rcpp
