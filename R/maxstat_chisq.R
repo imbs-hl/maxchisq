@@ -19,7 +19,7 @@
 ##' @return Vector of best cutpoint, test statistic and p-value.
 ##' @author Marvin N. Wright
 ##' @references
-##'   Betensky, R. A., & Rabinowitz, D. (1999). Maximally Selected x2 Statistics for k×2 Tables. Biometrics 55, 317-320.
+##'   Betensky, R. A., & Rabinowitz, D. (1999). Maximally Selected x2 Statistics for kx2 Tables. Biometrics 55, 317-320.
 ##'   Miller, R., & Siegmund, D. (1982). Maximally selected chi square statistics. Biometrics 38, 1011-1016.
 ##' @importFrom Rcpp evalCpp
 ##' @useDynLib maxchisq
