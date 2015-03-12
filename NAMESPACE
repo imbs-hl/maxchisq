@@ -2,6 +2,5 @@
 
 export(maxstat_chisq)
 export(maxstat_chisq_test)
-import(Rcpp)
 importFrom(Rcpp,evalCpp)
 useDynLib(maxchisq)

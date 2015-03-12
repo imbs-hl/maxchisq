@@ -9,7 +9,7 @@
 ##' @return P-value estimation
 ##' @author Marvin N. Wright
 ##' @references
-##'   Betensky, R. A., & Rabinowitz, D. (1999). Maximally Selected \eqn{\chi2} Statistics for k×2 Tables. Biometrics 55, 317-320.
+##'   Betensky, R. A., & Rabinowitz, D. (1999). Maximally Selected x2 Statistics for k×2 Tables. Biometrics 55, 317-320.
 pmaxchisq_betensky <- function(b, k, minprop = 0.1, maxprop = 1-minprop) {
   ## Internal function, no argument checks!
   
@@ -77,7 +77,7 @@ pmaxchisq_miller <- function(b, minprop = 0.1, maxprop = 1-minprop) {
 ##' @param num_permutations Number of permutations used
 ##' @return P-value estimation
 ##' @author Marvin N. Wright
-#' @import Rcpp
+##' @importFrom Rcpp evalCpp
 pmaxchisq_permutation <- function(b, y, x,
                                   minprop = 0.1, maxprop = 1-minprop,
                                   num_permutations = 10000) {
