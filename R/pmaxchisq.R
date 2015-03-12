@@ -2,7 +2,7 @@
 ##' P-value estimation for a maximally selected chi squared statistic using the approximation by Betensky & Rabinowitz 1999. 
 ##'
 ##' @title Betensky & Rabinowitz p-value estimation
-##' @param b 
+##' @param b Quantile, i.e., the value of the test statistic
 ##' @param k Number of rows in contingency table
 ##' @param minprop Lower quantile for cutpoint 
 ##' @param maxprop Upper quantile for cutpoint 
@@ -34,7 +34,7 @@ pmaxchisq_betensky <- function(b, k, minprop = 0.1, maxprop = 1-minprop) {
 ##' P-value estimation for a maximally selected chi squared statistic using the approximation by Miller & Siegmund 1982. 
 ##'
 ##' @title Miller & Siegmund p-value estimation
-##' @param b 
+##' @param b Quantile, i.e., the value of the test statistic
 ##' @param minprop Lower quantile for cutpoint 
 ##' @param maxprop Upper quantile for cutpoint 
 ##' @return P-value estimation
@@ -69,7 +69,7 @@ pmaxchisq_miller <- function(b, minprop = 0.1, maxprop = 1-minprop) {
 ##' P-value estimation for a maximally selected chi squared statistic using permutations.
 ##' 
 ##' @title Permutation p-value estimation
-##' @param b
+##' @param b Quantile, i.e., the value of the test statistic
 ##' @param y Response
 ##' @param x Covariate
 ##' @param minprop Lower quantile for cutpoint 
