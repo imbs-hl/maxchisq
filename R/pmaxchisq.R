@@ -66,8 +66,6 @@ pmaxchisq_miller <- function(b, minprop = 0.1, maxprop = 1-minprop) {
   pmin(p, 1)
 }
 
-## TODO: Compare speed if only C++ function for test statistic used
-## TODO: Possible splits and num_left are computed here and in main function.. But should this work without main function, too?
 ##' P-value estimation for a maximally selected chi squared statistic using permutations.
 ##' 
 ##' @title Permutation p-value estimation
@@ -89,6 +87,7 @@ pmaxchisq_permutation <- function(b, y, x,
   k <- nlevels(y)
   class_counts <- tabulate(y, nbins = k)
 
+  ## Possible splits
   x_sorted <- sort(x)
   all_values <- unique(x_sorted)
   quantiles <- quantile(x, c(minprop, maxprop))

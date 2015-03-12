@@ -4,7 +4,6 @@
 // [0,n) as required by the STL algorithm
 inline int randWrapper(const int n) { return floor(unif_rand()*n); }
 
-// TODO: Use matrix instead of 2 vectors?
 // [[Rcpp::export]]
 double chisq_statistic(std::vector<double> observed_left, std::vector<double> observed_right, 
                        size_t k, size_t n) {
