@@ -75,3 +75,4 @@ b <- 0:50
 maxchisq:::pmaxchisq_miller(b = b)
 
 maxchisq:::pmaxchisq_permutation(b = b, y = iris$Species, x = iris$Petal.Length)
+
