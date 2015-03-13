@@ -74,11 +74,11 @@ maxstat_chisq <- function(y, x, minprop = 0.1, maxprop = 1-minprop, pval_method 
 
   ## P-value for best cutpoint
   if (pval_method == "betensky") {
-    pvalue <- pmaxchisq_betensky(b = best_cutpoint, k = k, minprop = minprop, maxprop = maxprop)
+    pvalue <- pmaxchisq_betensky(b = best_teststat, k = k, minprop = minprop, maxprop = maxprop)
   } else if (pval_method == "miller") {
-    pvalue <- pmaxchisq_miller(b = best_cutpoint, minprop = minprop, maxprop = maxprop)
+    pvalue <- pmaxchisq_miller(b = best_teststat, minprop = minprop, maxprop = maxprop)
   } else if (pval_method == "permutation") {
-    pvalue <- pmaxchisq_permutation(b = best_cutpoint, y = y, x = x, minprop = minprop, maxprop = maxprop, ...)
+    pvalue <- pmaxchisq_permutation(b = best_teststat, y = y, x = x, minprop = minprop, maxprop = maxprop, ...)
   } else if (pval_method == "none") {
     pvalue <- NA
   } else {
