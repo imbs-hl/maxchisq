@@ -58,7 +58,7 @@ maxstat_chisq <- function(y, x, minprop = 0.1, maxprop = 1-minprop, pval_method 
   num_left <- sapply(possible_splits, function(cutpoint) {
     tabulate(y_sorted[x_sorted <= cutpoint], nbins = k)
   })
-  num_right <- tabulate(y_sorted) - num_left
+  num_right <- tabulate(y_sorted, nbins = k) - num_left
 
   ## Test statistics for all cutpoints
   teststats <- sapply(1:length(possible_splits), function(i) {
