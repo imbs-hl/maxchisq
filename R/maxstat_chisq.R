@@ -40,6 +40,9 @@ maxstat_chisq <- function(y, x, minprop = 0.1, maxprop = 1-minprop, pval_method 
     stop("Error: maxprop not in [0.5, 1].")
   }
   
+  ## Remove empty factor levels
+  y <- factor(y)
+  
   n <- length(y)
   k <- nlevels(y)
 
