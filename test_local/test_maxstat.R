@@ -13,7 +13,7 @@ x_sorted <- sort(x)
 y_sorted <- y[order(x)]
 all_values <- unique(x_sorted)
 quantiles <- quantile(x, c(minprop, maxprop))
-possible_splits <- all_values[all_values >= quantiles[1] & all_values <= quantiles[2]]
+possible_splits <- all_values[all_values >= quantiles[1] & all_values < quantiles[2]]
 
 ## Compute test statistics
 teststats <- sapply(possible_splits, function(split) {

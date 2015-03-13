@@ -91,7 +91,7 @@ pmaxchisq_permutation <- function(b, y, x,
   x_sorted <- sort(x)
   all_values <- unique(x_sorted)
   quantiles <- quantile(x, c(minprop, maxprop))
-  possible_splits <- all_values[all_values >= quantiles[1] & all_values <= quantiles[2]]
+  possible_splits <- all_values[all_values >= quantiles[1] & all_values < quantiles[2]]
 
   ## For each cutpoint determine last position in x for which x <= cutpoint,
   ## i.e. the number of observations left of the cutpoint

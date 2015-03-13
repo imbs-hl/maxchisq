@@ -55,7 +55,7 @@ maxstat_chisq <- function(y, x, minprop = 0.1, maxprop = 1-minprop, pval_method 
   y_sorted <- y[order(x)]
   all_values <- unique(x_sorted)
   quantiles <- quantile(x, c(minprop, maxprop))
-  possible_splits <- all_values[all_values >= quantiles[1] & all_values <= quantiles[2]]
+  possible_splits <- all_values[all_values >= quantiles[1] & all_values < quantiles[2]]
 
   ## Observed observations left and right of split per class
   num_left <- sapply(possible_splits, function(cutpoint) {
