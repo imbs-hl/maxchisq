@@ -83,7 +83,7 @@ maxstat_chisq <- function(y, x, minprop = 0.1, maxprop = 1-minprop, pval_method 
   }
 
   ## Return best cutpoint, test statistic and p-value
-  c(cutpoint = best_cutpoint, teststat = best_teststat, pvalue = pvalue)
+  list(cutpoint = best_cutpoint, teststat = best_teststat, pvalue = pvalue)
 }
 
 ##' Maximally selected chi squared test for multiple covariates. 
@@ -111,16 +111,20 @@ maxstat_chisq_test <- function(formula, data, na.action, ...) {
   ## Apply formula
   data_model <- model.frame(formula, data, na.action = na.action)
 
-  ## Apply maximally selected chi2 statistic to each covariate
-  maxstats <- data.frame(t(sapply(data_model[, -1, drop = FALSE], maxstat_chisq, y = data_model[, 1], ...)))
-
+  ## Apply maximally selected chi2 statistic to each covariate  
+  maxstats <- lapply(data_model[, -1, drop = FALSE], maxstat_chisq, y = data_model[, 1], ...)
+  
+  ## Get pvalues and cutpoints, remove names
+  pvalues <- unname(sapply(maxstats, function(x) x$pvalue))
+  cutpoints <- unname(sapply(maxstats, function(x) x$cutpoint))
+  
   ## Select covariate with minimal p value
-  best_idx <- max.col(t(-maxstats$pvalue))
+  best_idx <- max.col(t(-pvalues))
 
   ## Return best covariate, cutpoint and p value
-  list(covariate = rownames(maxstats)[best_idx],
-    cutpoint = maxstats[best_idx, ]$cutpoint,
-    pvalue = maxstats[best_idx, ]$pvalue)
+  list(covariate = names(maxstats)[best_idx],
+    cutpoint = cutpoints[best_idx],
+    pvalue = pvalues[best_idx])
 }
 
 
