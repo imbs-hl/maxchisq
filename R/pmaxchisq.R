@@ -118,11 +118,6 @@ pmaxchisq_exact <- function(b, y, x, minprop = 0.1, maxprop = 1-minprop) {
   ## Internal function, no argument checks!
 
   class_counts <- tabulate(y, nbins = 2)
-  
-  ##n_per_value <- table(x)
-  quantiles <- quantile(x, c(minprop, maxprop))
-  n_per_value <- table(x[x >= quantiles[1] & x < quantiles[2]])
-  
   1-sapply(b, exactmaxsel::Ford, n0 = class_counts[1], n1 = class_counts[2], 
-                                 A = n_per_value, statistic = "chi2")
+                                 A = table(x), statistic = "chi2")
 }
