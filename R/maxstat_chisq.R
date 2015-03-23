@@ -47,7 +47,10 @@ maxstat_chisq <- function(y, x, minprop = 0.1, maxprop = 1-minprop, pval_method 
   k <- nlevels(y)
 
   if (pval_method == "miller" & k != 2) {
-    stop("Error: Miller & Siegmund approximation only applicable to 2-class problems.")
+    stop("Error: Miller & Siegmund approximation applicable to 2-class problems only.")
+  }
+  if (pval_method == "exact" & k != 2) {
+    stop("Error: Exact p-values implemented for 2-class problems only.")
   }
 
   ## Possible splits
@@ -86,6 +89,8 @@ maxstat_chisq <- function(y, x, minprop = 0.1, maxprop = 1-minprop, pval_method 
     pvalue <- pmaxchisq_permutation(b = best_teststat, y = y, x = x, minprop = minprop, maxprop = maxprop, ...)
   } else if (pval_method == "none") {
     pvalue <- NA
+  } else if (pval_method == "exact") {
+    pvalue <- pmaxchisq_exact(b = best_teststat, y = y, x = x, minprop = minprop, maxprop = maxprop)
   } else {
     stop("Error: Unknown pval_method.")
   }

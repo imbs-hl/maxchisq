@@ -102,3 +102,32 @@ pmaxchisq_permutation <- function(b, y, x,
   ## Run Rcpp permutation function
   pmaxchisq_permutation_internal(b, k, n, num_permutations, as.numeric(y), num_left, class_counts)
 }
+
+##' Exact P-values for a maximally selected chi squared statistic with 2 classes.
+##' 
+##' @title Exact p-values
+##' @param b Quantile, i.e., the value of the test statistic
+##' @param y Response
+##' @param x Covariate
+##' @param minprop Lower quantile for cutpoint 
+##' @param maxprop Upper quantile for cutpoint 
+##' @return Exact p-value
+##' @author Marvin N. Wright
+##' @importFrom exactmaxsel Ford
+pmaxchisq_exact <- function(b, y, x, minprop = 0.1, maxprop = 1-minprop) {
+  ## Internal function, no argument checks!
+
+  n <- length(y)
+  k <- nlevels(y)
+  class_counts <- tabulate(y, nbins = k)
+  
+  ## TODO: Minprop/Maxprop?
+  ## Possible splits
+#   x_sorted <- sort(x)
+#   all_values <- unique(x_sorted)
+#   quantiles <- quantile(x, c(minprop, maxprop))
+#   possible_splits <- all_values[all_values >= quantiles[1] & all_values < quantiles[2]]
+  
+  exactmaxsel::Ford(c = b, n0 = class_counts[1], n1 = class_counts[2], 
+                    A = table(x), statistic = "chi2")
+}

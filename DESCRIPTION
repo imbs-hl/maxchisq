@@ -7,6 +7,6 @@ Author: Marvin N. Wright
 Maintainer: Marvin N. Wright <wright@imbs.uni-luebeck.de>
 Description: Maximally selected chi squared statistics. Find the best cutpoint in data with a categorical outcome. Implements several methods to estimate p-values of maximally selected chi squared statistics. 
 License: GPL-3
-Imports: Rcpp
+Imports: Rcpp, exactmaxsel
 LinkingTo: Rcpp
 Suggests: testthat

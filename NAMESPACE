@@ -3,4 +3,5 @@
 export(maxstat_chisq)
 export(maxstat_chisq_test)
 importFrom(Rcpp,evalCpp)
+importFrom(exactmaxsel,Ford)
 useDynLib(maxchisq)
