@@ -34,3 +34,6 @@ maxstat_chisq_test(Species ~ ., iris, pval_method = "betensky")
 
 ## Only one covar
 maxstat_chisq_test(Species ~ Petal.Length, iris, pval_method = "betensky")
+
+## Exact method
+maxstat_chisq_test(Species ~ Petal.Length, iris[1:100, ], pval_method = "exact")

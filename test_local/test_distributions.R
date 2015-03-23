@@ -12,13 +12,12 @@ x <- dat$Petal.Length
 b <- seq(0, 10, 0.01)
 betensky <- maxchisq:::pmaxchisq_betensky(b = b, k = nlevels(y))
 miller <- maxchisq:::pmaxchisq_miller(b = b)
-exact <- sapply(b, exactmaxsel::Ford, n0 = table(y)[1], n1 = table(y)[2], 
-                A = table(x), statistic = "chi2")
+exact <- maxchisq:::pmaxchisq_exact(b = b, y = y, x = x)
 perm <- maxchisq:::pmaxchisq_permutation(b = b, y = y, x = x)
 ##perm <- sapply(b, maxchisq:::pmaxchisq_permutation, y = y, x = x)
 plot(b, betensky, col = "blue", ylim = c(0, 1))
 points(b, miller, col = "red")
-points(b, 1-exact, col = "green")
+points(b, exact, col = "green")
 points(b, perm, col = "cyan")
 
 ## TODO: Compare for other n0/n1/A -> other data, simulate? 
