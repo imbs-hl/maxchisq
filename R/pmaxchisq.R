@@ -117,6 +117,12 @@ pmaxchisq_permutation <- function(b, y, x,
 pmaxchisq_exact <- function(b, y, x, minprop = 0.1, maxprop = 1-minprop) {
   ## Internal function, no argument checks!
 
+  ## TODO: OK to just exclude extreme values?
+  ## Restrict to possible splits
+  quantiles <- quantile(x, c(minprop, maxprop))
+  xx <- x[x >= quantiles[1] & x <= quantiles[2]]
+  
+  ## Compute p-value
   class_counts <- tabulate(y, nbins = 2)
   1-sapply(b, exactmaxsel::Ford, n0 = class_counts[1], n1 = class_counts[2], 
                                  A = table(x), statistic = "chi2")
