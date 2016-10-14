@@ -10,6 +10,7 @@
 ##' @author Marvin N. Wright
 ##' @references
 ##'   Betensky, R. A., & Rabinowitz, D. (1999). Maximally Selected x2 Statistics for kx2 Tables. Biometrics 55, 317-320.
+##' @import stats
 pmaxchisq_betensky <- function(b, k, minprop = 0.1, maxprop = 1-minprop) {
   ## Internal function, no argument checks!
   

@@ -2,6 +2,7 @@
 
 export(maxstat_chisq)
 export(maxstat_chisq_test)
+import(stats)
 importFrom(Rcpp,evalCpp)
 importFrom(exactmaxsel,Ford)
 useDynLib(maxchisq)
