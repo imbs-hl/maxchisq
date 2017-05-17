@@ -49,9 +49,9 @@ cdf <- apply(params, 1, function(p) {
     x <- rnorm(n)
     y <- factor(round(runif(n, 0.5, p["k"]+0.5)))
     levels(y) <- 1:p["k"]
-    return(pmaxchisq_permutation(b = p["b"], y = y, x = x))
+    return(maxchisq:::pmaxchisq_permutation(b = p["b"], y = y, x = x))
   } else {
-    return(pmaxchisq_betensky(b = p["b"], k = p["k"]))
+    return(maxchisq:::pmaxchisq_betensky(b = p["b"], k = p["k"]))
   }
 })
 dat <- cbind(params, cdf)
